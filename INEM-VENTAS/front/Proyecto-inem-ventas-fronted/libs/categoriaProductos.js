@@ -1,6 +1,6 @@
 const API = "http://localhost:3000/api/categoriaProductos";
 
-const frm = document.getElementById("formCategoriaProducto");
+const frm = document.getElementById("frmCategoriaProducto");
 
 function obtenerDatosFormulario() {
   return {
@@ -26,7 +26,7 @@ document.getElementById("btnGuardar").addEventListener("click", async () => {
     const json = await respuesta.json();
 
     if (respuesta.ok) {
-      alert(json.mensaje || "Estudiante registrado");
+      alert(json.mensaje || "categoria producto registrado");
 
       frm.reset();
       cargarCategoriasProductos();
@@ -44,7 +44,7 @@ document.getElementById("btnActualizar").addEventListener("click", async () => {
   const id = document.getElementById("CatPro_id").value;
 
   if (!id) {
-    alert("Debe ingresar el código del estudiante");
+    alert("Debe ingresar el código de la categoria del producto");
 
     return;
   }
@@ -87,21 +87,14 @@ document.getElementById("btnEliminar").addEventListener("click", async () => {
   }
 
   try {
-    const datos = obtenerDatosFormulario();
     const respuesta = await fetch(`${API}/${id}`, {
       method: "DELETE",
-
-      headers: {
-        "Content-Type": "application/json",
-      },
-
-      body: JSON.stringify(datos),
     });
 
     const json = await respuesta.json();
 
     if (respuesta.ok) {
-      alert(json.mensaje || "Estudiante eliminado");
+      alert(json.mensaje || "categoria del producto eliminado");
       frm.reset();
       cargarCategoriasProductos();
     } else {
@@ -149,7 +142,7 @@ async function cargarCategoriasProductos() {
   } catch (error) {
     console.error(error);
 
-    alert("No fue posible cargar los estudiantes");
+    alert("No fue posible cargar las categorías de producto");
   }
 }
 

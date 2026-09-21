@@ -121,12 +121,6 @@
                     <i class="lni lni-chevron-left me-2"></i> Menu
                   </button>
                 </div>
-                <div class="header-search d-none d-md-flex">
-                  <form action="#">
-                    <input type="text" placeholder="Search..." />
-                    <button><i class="lni lni-search-alt"></i></button>
-                  </form>
-                </div>
               </div>
             </div>
             <div class="col-lg-7 col-md-7 col-6">
@@ -364,7 +358,6 @@
                       </select>
                     </div>
                   </div>
-                  <a href="#0" class="main-btn primary-btn btn-hover mb-15">+ agregar producto</a>
                   <div class="select-style-1">
                     <label>vehículo</label>
                     <div class="select-position">
@@ -373,13 +366,12 @@
                       </select>
                     </div>
                   </div>
-                  <a href="#0" class="main-btn primary-btn btn-hover mb-15">+ agregar vehículo</a>
                   <ul class="buttons-group">
                     <li>
-                      <a href="#0" class="main-btn success-btn-outline rounded-full btn-hover">confirmar</a>
+                      <a href="#0" class="main-btn success-btn-outline rounded-full btn-hover">Guardar</a>
                     </li>
                     <li>
-                      <a href="#0" class="main-btn danger-btn-outline rounded-full btn-hover">cancelar</a>
+                      <a href="#0" class="main-btn primary-btn-outline rounded-full btn-hover">Actualizar</a>
                     </li>
                   </ul>
                 </div>
@@ -405,6 +397,9 @@
                             <h6>Cliente</h6>
                           </th>
                           <th>
+                            <h6>Empleado</h6>
+                          </th>
+                          <th>
                             <h6>Acción</h6>
                           </th>
                         </tr>
@@ -412,7 +407,7 @@
                       </thead>
                       <tbody>
                         <tr>
-                          <td colspan="3" class="text-center text-sm">Aún no hay registros — se cargarán desde el backend.</td>
+                          <td colspan="4" class="text-center text-sm">Aún no hay registros — se cargarán desde el backend.</td>
                         </tr>
                       </tbody>
                     </table>
@@ -469,5 +464,6 @@
     <script src="assets/js/world-merc.js"></script>
     <script src="assets/js/polyfill.js"></script>
     <script src="assets/js/main.js"></script>
+    <script src="libs/crud.js"></script>
   </body>
 </html>
