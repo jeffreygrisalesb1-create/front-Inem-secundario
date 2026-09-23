@@ -1,5 +1,64 @@
 /* =========== form elements css ========== */
 
+/* ===== form color theme ===== */
+.card-style:has(input, select, textarea) {
+  background: #101b3d;
+  border: 1px solid #243968;
+  box-shadow: 0 12px 24px -4px rgba(16, 27, 61, 0.28), 0 0 2px 0 rgba(16, 27, 61, 0.2);
+
+  label,
+  .form-label {
+    color: #d8e6ff;
+  }
+
+  input,
+  select,
+  textarea {
+    background: #172b55;
+    border-color: #36558c;
+    color: #f5f8ff;
+
+    &::placeholder {
+      color: #9db2d6;
+    }
+
+    &:focus {
+      background: #1d376b;
+      border-color: #35d0ba;
+      color: #fff;
+      box-shadow: 0 0 0 3px rgba(53, 208, 186, 0.16);
+    }
+  }
+
+  .input-style-1 input,
+  .input-style-1 textarea,
+  .input-style-2 input,
+  .input-style-2 textarea,
+  .input-style-3 input,
+  .input-style-3 textarea,
+  .select-position select {
+    background: #172b55;
+    border-color: #36558c;
+    color: #f5f8ff;
+  }
+
+  .input-style-1 input:focus,
+  .input-style-1 textarea:focus,
+  .input-style-2 input:focus,
+  .input-style-2 textarea:focus,
+  .input-style-3 input:focus,
+  .input-style-3 textarea:focus,
+  .select-position select:focus {
+    background: #1d376b;
+    border-color: #35d0ba;
+    color: #fff;
+  }
+
+  .select-position::after {
+    border-color: #35d0ba;
+  }
+}
+
 /* ===== input style ===== */
 .input-style-1 {
   position: relative;
