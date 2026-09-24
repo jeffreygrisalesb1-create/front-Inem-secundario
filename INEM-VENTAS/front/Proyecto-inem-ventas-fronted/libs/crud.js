@@ -10,7 +10,7 @@ const CRUD_CONFIG = {
   "form-paises.html": { api: "paises", id: "Pais_id", fields: ["nombre"] },
   "form-productos.html": { api: "productos", id: "Producto_id", fields: ["nombre", "precio", "CatPro_id"], aliases: { CatPro_id: "catpro_id" }, relations: [{ field: "CatPro_id", api: "categoriaProductos", value: "CatPro_id" }] },
   "form-transportadoras.html": { api: "transportadoras", id: "Transporte_id", fields: ["nombre"] },
-  "form-vehiculos.html": { api: "vehiculos", id: "Vehiculo_id", fields: ["nombre", "Marca", "Modelo", "Placa", "Color", "Cantidad", "Categoria_id", "precio"], display: ["nombre", "Marca", "Modelo", "Placa", "Color", "Cantidad", "Categoria_id"], aliases: { Marca: "marca", Modelo: "modelo", Placa: "placa", Color: "color", Cantidad: "cantidad", Categoria_id: "categoria_id" }, relations: [{ field: "Categoria_id", api: "categorias", value: "Categoria_id" }] }
+  "form-vehiculos.html": { api: "vehiculos", id: "Vehiculo_id", fields: ["nombre", "Marca", "Modelo", "Placa", "Color", "Cantidad", "Categoria_id", "precio"], display: ["nombre", "Marca", "Modelo", "Placa", "Color", "Cantidad", "Categoria_id", "precio"], aliases: { Marca: "marca", Modelo: "modelo", Placa: "placa", Color: "color", Cantidad: "cantidad", Categoria_id: "categoria_id" }, relations: [{ field: "Categoria_id", api: "categorias", value: "Categoria_id" }] }
 };
 
 const pageName = location.pathname.split("/").pop();
