@@ -1,0 +1,468 @@
+body.dealer-form {
+  --dealer-ink: #09141e;
+  --dealer-muted: #9aadb8;
+  --dealer-paper: #0b131d;
+  --dealer-line: #293b48;
+  --dealer-red: #ee5438;
+  --dealer-blue: #54e0bd;
+  --dealer-text: #e8f0f4;
+  --dealer-panel: #12212e;
+  --dealer-input: #0b1823;
+  background: var(--dealer-paper);
+  color: var(--dealer-text);
+  font-family: "Aptos", "Segoe UI", sans-serif;
+}
+
+body.dealer-form .main-wrapper {
+  min-height: 100vh;
+  background: var(--dealer-paper);
+}
+
+body.dealer-form .sidebar-nav-wrapper {
+  background: var(--dealer-ink);
+}
+
+@media (min-width: 1200px) {
+  body.dealer-form .sidebar-nav-wrapper {
+    transform: translateX(0) !important;
+  }
+
+  body.dealer-form .sidebar-nav-wrapper.active {
+    transform: translateX(-260px) !important;
+  }
+}
+
+@media (max-width: 1199px) {
+  body.dealer-form .sidebar-nav-wrapper {
+    transform: translateX(-260px) !important;
+  }
+
+  body.dealer-form .sidebar-nav-wrapper.active {
+    transform: translateX(0) !important;
+  }
+}
+
+body.dealer-form .sidebar-nav-wrapper .navbar-logo a {
+  display: block;
+  padding: 8px 10px;
+}
+
+body.dealer-form .sidebar-nav-wrapper .navbar-logo img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 108px;
+  border-radius: 4px;
+  content: url("http://localhost:3000/branding/inem-motors-logo.png");
+  object-fit: contain;
+}
+
+body.dealer-form .sidebar-nav-wrapper .promo-box {
+  display: none;
+}
+
+body.dealer-form .sidebar-nav-wrapper .sidebar-nav ul li a,
+body.dealer-form .sidebar-nav-wrapper .sidebar-nav ul li a .text {
+  color: #d7dbd6;
+}
+
+body.dealer-form .sidebar-nav-wrapper .sidebar-nav ul li a.active,
+body.dealer-form .sidebar-nav-wrapper .sidebar-nav ul li a:hover {
+  color: #fff;
+}
+
+body.dealer-form .header {
+  background: rgba(16, 30, 42, .96);
+  border-bottom: 1px solid var(--dealer-line);
+  box-shadow: none;
+}
+
+body.dealer-form .menu-toggle-btn .main-btn {
+  border-color: var(--dealer-ink);
+  background: var(--dealer-ink);
+}
+
+body.dealer-form .tab-components:not(.inventory-page)::before,
+body.dealer-form .main-wrapper > .container-fluid::before {
+  position: relative;
+  display: flex;
+  min-height: 335px;
+  max-width: 1480px;
+  align-items: flex-end;
+  margin: 25px auto 0;
+  padding: 42px 48px;
+  border: 1px solid rgba(255, 255, 255, .16);
+  border-left: 5px solid #ee5438;
+  border-radius: 7px;
+  background:
+    linear-gradient(90deg, rgba(13, 20, 24, .92) 0%, rgba(13, 20, 24, .73) 41%, rgba(13, 20, 24, .12) 100%),
+    url("https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1800&q=85") center 56% / cover no-repeat;
+  color: #fff;
+  content: "InemMotors\A El camino hacia tu próximo vehículo empieza aquí.";
+  white-space: pre-line;
+  font-size: 34px;
+  font-weight: 700;
+  line-height: 1.16;
+  text-shadow: 0 2px 18px rgba(0, 0, 0, .22);
+  animation: dealer-enter .7s cubic-bezier(.2, .7, .2, 1) both;
+}
+
+body.dealer-form .inventory-page::before {
+  display: none !important;
+}
+
+body.dealer-form .tab-components > .container-fluid,
+body.dealer-form .main-wrapper > .container-fluid {
+  max-width: 1540px;
+}
+
+body.dealer-form .title-wrapper {
+  display: none;
+}
+
+body.dealer-form .title-wrapper .title h2,
+body.dealer-form .main-wrapper > .container-fluid > h2 {
+  margin: 0;
+  color: var(--dealer-text);
+  font-size: 27px;
+  font-weight: 650;
+}
+
+body.dealer-form .breadcrumb-wrapper {
+  display: none;
+}
+
+body.dealer-form .form-elements-wrapper {
+  display: grid;
+  grid-template-columns: minmax(280px, .78fr) minmax(0, 1.65fr);
+  align-items: start;
+  gap: 22px;
+}
+
+body.dealer-form .form-elements-wrapper > .row {
+  min-width: 0;
+  margin: 0;
+}
+
+body.dealer-form .form-elements-wrapper > .row > [class*="col-"] {
+  width: 100%;
+  padding: 0;
+}
+
+body.dealer-form .card-style {
+  min-width: 0;
+  padding: 30px;
+  border: 1px solid rgba(117, 164, 184, .14);
+  border-top: 3px solid var(--dealer-blue);
+  border-radius: 7px;
+  background: var(--dealer-panel);
+  box-shadow: 0 14px 38px rgba(0, 0, 0, .2);
+}
+
+body.dealer-form .form-elements-wrapper > .row:first-child .card-style {
+  border-top-color: var(--dealer-red);
+  animation: dealer-enter .55s cubic-bezier(.2, .7, .2, 1) .12s both;
+}
+
+body.dealer-form .form-elements-wrapper > .row:nth-child(2) .card-style {
+  animation: dealer-enter .55s cubic-bezier(.2, .7, .2, 1) .22s both;
+}
+
+body.dealer-form .card-style h6 {
+  margin-bottom: 8px;
+  color: var(--dealer-text);
+  font-size: 21px;
+  font-weight: 700;
+}
+
+body.dealer-form .card-style p.text-sm,
+body.dealer-form .card-style > p:not(.text-sm) {
+  color: var(--dealer-muted);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+body.dealer-form .input-style-1,
+body.dealer-form .input-style-2,
+body.dealer-form .select-style-1,
+body.dealer-form .card-style > div:has(> label) {
+  margin-bottom: 18px;
+}
+
+body.dealer-form .card-style label {
+  display: block;
+  margin-bottom: 8px;
+  color: #cbd7dd;
+  font-size: 12px;
+  font-weight: 650;
+}
+
+body.dealer-form .card-style input:not([type="hidden"]),
+body.dealer-form .card-style select,
+body.dealer-form .card-style textarea {
+  width: 100%;
+  min-height: 46px;
+  border: 1px solid #304755;
+  border-radius: 3px;
+  background-color: var(--dealer-input);
+  color: var(--dealer-text);
+  font-size: 14px;
+  transition: border-color .2s ease, box-shadow .2s ease, background-color .2s ease;
+}
+
+body.dealer-form .card-style textarea {
+  min-height: 110px;
+  padding: 12px 14px;
+  resize: vertical;
+}
+
+body.dealer-form .card-style input:focus,
+body.dealer-form .card-style select:focus,
+body.dealer-form .card-style textarea:focus {
+  border-color: var(--dealer-blue);
+  background-color: #132a38;
+  box-shadow: 0 0 0 3px rgba(84, 224, 189, .14);
+  outline: none;
+}
+
+body.dealer-form .buttons-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin: 5px 0 0;
+}
+
+body.dealer-form .buttons-group li {
+  margin: 0;
+}
+
+body.dealer-form .buttons-group .main-btn,
+body.dealer-form .card-style p > a {
+  display: inline-flex;
+  min-height: 40px;
+  align-items: center;
+  justify-content: center;
+  padding: 0 14px;
+  border: 1px solid var(--dealer-blue);
+  border-radius: 3px;
+  background: #173044;
+  color: var(--dealer-blue);
+  font-size: 12px;
+  font-weight: 650;
+  text-decoration: none;
+  transition: color .2s ease, background .2s ease, border-color .2s ease, transform .2s ease;
+}
+
+body.dealer-form .buttons-group .success-btn-outline,
+body.dealer-form .card-style p > a:first-child {
+  border-color: #39ff14;
+  background: #39ff14;
+  box-shadow: 0 0 12px rgba(57, 255, 20, .35);
+  color: #10210c;
+}
+
+body.dealer-form .buttons-group .primary-btn-outline {
+  border-color: #00a3ff;
+  background: #00a3ff;
+  box-shadow: 0 0 12px rgba(0, 163, 255, .3);
+  color: #071a26;
+}
+
+body.dealer-form .buttons-group .danger-btn-outline {
+  border-color: #ff1744;
+  background: #ff1744;
+  box-shadow: 0 0 12px rgba(255, 23, 68, .3);
+  color: #fff;
+}
+
+body.dealer-form .buttons-group .main-btn:hover,
+body.dealer-form .card-style p > a:hover {
+  transform: translateY(-2px);
+}
+
+body.dealer-form .buttons-group .success-btn-outline:hover,
+body.dealer-form .card-style p > a:first-child:hover {
+  border-color: #66ff43;
+  background: #66ff43;
+  box-shadow: 0 0 18px rgba(57, 255, 20, .5);
+}
+
+body.dealer-form .buttons-group .primary-btn-outline:hover {
+  border-color: #4dc4ff;
+  background: #4dc4ff;
+  box-shadow: 0 0 18px rgba(0, 163, 255, .45);
+}
+
+body.dealer-form .buttons-group .danger-btn-outline:hover {
+  border-color: #ff4d6d;
+  background: #ff4d6d;
+  box-shadow: 0 0 18px rgba(255, 23, 68, .45);
+}
+
+body.dealer-form .table-wrapper {
+  overflow-x: auto;
+  border-top: 1px solid var(--dealer-line);
+}
+
+body.dealer-form .table {
+  min-width: 440px;
+  margin: 0;
+}
+
+body.dealer-form .table thead th {
+  padding: 15px 12px;
+  border-bottom: 2px solid var(--dealer-blue);
+  background: #172a38;
+}
+
+body.dealer-form .table thead h6 {
+  margin: 0;
+  color: var(--dealer-muted);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .8px;
+  text-transform: uppercase;
+}
+
+body.dealer-form .table tbody td {
+  padding: 14px 12px;
+  border-bottom: 1px solid #233744;
+  background: #101e2a;
+  color: #d4e0e5;
+  font-size: 13px;
+  vertical-align: middle;
+}
+
+body.dealer-form .table tbody tr {
+  animation: dealer-row-enter .35s ease both;
+  transition: background-color .18s ease;
+}
+
+body.dealer-form .table tbody tr:hover {
+  background-color: #1a2f3c;
+}
+
+body.dealer-form .table tbody tr:nth-child(2) {
+  animation-delay: .05s;
+}
+
+body.dealer-form .table tbody tr:nth-child(3) {
+  animation-delay: .1s;
+}
+
+body.dealer-form .table tbody tr:nth-child(4) {
+  animation-delay: .15s;
+}
+
+body.dealer-form .table tbody button {
+  min-height: 34px;
+  padding: 0 12px;
+  border: 1px solid var(--dealer-blue);
+  border-radius: 3px;
+  background: #173044;
+  color: var(--dealer-blue);
+  font-size: 12px;
+  font-weight: 650;
+  transition: color .2s ease, background .2s ease, transform .2s ease;
+}
+
+body.dealer-form .table tbody button:hover {
+  transform: translateY(-1px);
+  background: var(--dealer-blue);
+  color: #fff;
+}
+
+body.dealer-form .footer {
+  border-top: 1px solid var(--dealer-line);
+}
+
+body.dealer-form .footer .terms {
+  display: none !important;
+}
+
+body.dealer-form .profile-info .image img,
+body.dealer-form .author-info .image img {
+  display: none;
+}
+
+body.dealer-form .profile-info .image,
+body.dealer-form .author-info .image {
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--dealer-red);
+}
+
+body.dealer-form .profile-info .image::after,
+body.dealer-form .author-info .image::after {
+  color: #fff;
+  content: "IN";
+  font-size: 13px;
+  font-weight: 800;
+}
+
+@keyframes dealer-enter {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes dealer-row-enter {
+  from {
+    opacity: 0;
+    transform: translateY(7px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 991px) {
+  body.dealer-form .form-elements-wrapper {
+    grid-template-columns: minmax(250px, .8fr) minmax(0, 1.2fr);
+  }
+
+  body.dealer-form .card-style {
+    padding: 22px;
+  }
+}
+
+@media (max-width: 767px) {
+  body.dealer-form .tab-components:not(.inventory-page)::before,
+  body.dealer-form .main-wrapper > .container-fluid::before {
+    min-height: 300px;
+    margin-top: 16px;
+    padding: 27px 23px;
+    background-position: 61% center;
+    font-size: 27px;
+    line-height: 1.2;
+  }
+
+  body.dealer-form .form-elements-wrapper {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  body.dealer-form .card-style {
+    padding: 21px 18px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.dealer-form *,
+  body.dealer-form *::before,
+  body.dealer-form *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+  }
+}

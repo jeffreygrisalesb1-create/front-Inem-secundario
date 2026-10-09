@@ -2,7 +2,7 @@ const CRUD_CONFIG = {
   "form-categorias.html": { api: "categorias", id: "Categoria_id", fields: ["nombre"] },
   "form-ciudades.html": { api: "ciudades", id: "Ciudad_id", fields: ["nombre", "Pais_id"], aliases: { Pais_id: "pais_id" }, relations: [{ field: "Pais_id", api: "paises", value: "Pais_id" }] },
   "form-clientes.html": { api: "clientes", id: "Cliente_id", fields: ["nombre", "correo", "telefono", "dni"], display: ["nombre", "correo", "telefono", "dni"] },
-  "form-compras.html": { api: "compras", id: "Compra_id", fields: ["fecha", "Cliente_id", "Empleado_id"], display: ["fecha", "Cliente_id", "Empleado_id"], aliases: { Cliente_id: "cliente_id", Empleado_id: "empleado_id" }, relations: [{ field: "Cliente_id", label: "Cliente", api: "clientes", value: "Cliente_id" }, { field: "Empleado_id", label: "Empleado", api: "empleados", value: "Empleado_id" }, { field: "producto_id", label: "Producto", api: "productos", value: "Producto_id", uiOnly: true }, { field: "vehiculo_id", label: "Vehículo", api: "vehiculos", fallbackApi: "Vehiculos", value: "Vehiculo_id", uiOnly: true }] },
+  "form-compras.html": { api: "compras", id: "Compra_id", fields: ["fecha", "Cliente_id", "Empleado_id"], display: ["fecha", "Cliente_id", "Empleado_id", "producto_id", "vehiculo_id"], aliases: { Cliente_id: "cliente_id", Empleado_id: "empleado_id" }, relations: [{ field: "Cliente_id", label: "Cliente", api: "clientes", value: "Cliente_id" }, { field: "Empleado_id", label: "Empleado", api: "empleados", value: "Empleado_id" }, { field: "producto_id", label: "Producto", api: "productos", value: "Producto_id", uiOnly: true }, { field: "vehiculo_id", label: "Vehículo", api: "vehiculos", fallbackApi: "Vehiculos", value: "Vehiculo_id", uiOnly: true }] },
   "form-cp.html": { api: "cp", id: "Cp_id", fields: ["Compra_id", "Producto_id"], relations: [{ field: "Compra_id", api: "compras", value: "Compra_id" }, { field: "Producto_id", api: "productos", value: "Producto_id" }] },
   "form-cv.html": { api: "cv", id: "Cv_id", fields: ["Compra_id", "Vehiculo_id"], display: ["Compra_id", "Vehiculo_id"], relations: [{ field: "Compra_id", label: "Compra", api: "compras", value: "Compra_id" }, { field: "Vehiculo_id", label: "Vehículo", api: "vehiculos", value: "Vehiculo_id" }] },
   "form-empleados.html": { api: "empleados", id: "Empleado_id", fields: ["nombre", "correo", "telefono", "dni"], display: ["nombre", "correo", "telefono", "dni"] },
@@ -99,16 +99,58 @@ if (config) {
       }).join("");
     }
   };
+
+  const getRowValue = (row, field) => {
+    const key = Object.keys(row).find((name) => name.toLowerCase() === field.toLowerCase());
+    return key ? row[key] : undefined;
+  };
+
+  const loadPurchaseContents = async () => {
+    const [productLinks, vehicleLinks] = await Promise.all(["cp", "cv"].map(async (endpoint) => {
+      try {
+        const response = await fetch(API_ROOT + endpoint);
+        if (!response.ok) return [];
+        const rows = await response.json();
+        return Array.isArray(rows) ? rows : [];
+      } catch {
+        return [];
+      }
+    }));
+    const contents = new Map();
+
+    const addLinks = (links, relatedField, outputField) => {
+      links.forEach((link) => {
+        const purchaseId = getRowValue(link, "Compra_id");
+        const relatedId = getRowValue(link, relatedField);
+        if (purchaseId == null || relatedId == null) return;
+
+        const label = relationLabels[relatedField === "Producto_id" ? "producto_id" : "vehiculo_id"]?.[relatedId] ?? relatedId;
+        const entry = contents.get(String(purchaseId)) || { products: [], vehicles: [] };
+        if (!entry[outputField].includes(String(label))) entry[outputField].push(String(label));
+        contents.set(String(purchaseId), entry);
+      });
+    };
+
+    addLinks(productLinks, "Producto_id", "products");
+    addLinks(vehicleLinks, "Vehiculo_id", "vehicles");
+    return contents;
+  };
+
   const load = async () => {
     const response = await fetch(API_ROOT + config.api);
     if (!response.ok) throw new Error(await response.text());
     const rows = await response.json();
     const tbody = document.querySelector("tbody");
     if (!tbody) return;
+    const purchaseContents = config.api === "compras" ? await loadPurchaseContents() : new Map();
     tbody.innerHTML = rows.map((row) => {
       const idKey = config.id;
       const visible = (config.display || config.fields.slice(0, 3)).map((field) => {
-        const value = relationLabels[field]?.[row[field]] ?? row[field];
+        const purchase = purchaseContents.get(String(row[idKey]));
+        if (field === "producto_id") return `<td>${purchase?.products.join(", ") || "Sin producto"}</td>`;
+        if (field === "vehiculo_id") return `<td>${purchase?.vehicles.join(", ") || "Sin vehículo"}</td>`;
+        const rowValue = getRowValue(row, field);
+        const value = relationLabels[field]?.[rowValue] ?? rowValue;
         return `<td>${formatValue(value, field)}</td>`;
       }).join("");
       return `<tr>${visible}<td><button type="button" data-edit="${row[idKey]}">Editar</button></td></tr>`;
@@ -120,6 +162,37 @@ if (config) {
       idInput.value = currentId;
       config.fields.forEach((field) => { const element = getElement(field); if (element) element.value = inputValue(row[field], element); });
     }));
+  };
+
+  const showLoadError = () => {
+    const tbody = document.querySelector("tbody");
+    if (!tbody) return;
+
+    const row = document.createElement("tr");
+    const cell = document.createElement("td");
+    cell.colSpan = Math.max(1, tbody.closest("table")?.querySelectorAll("thead th").length || 1);
+    cell.className = "text-center text-sm";
+    cell.setAttribute("role", "status");
+    cell.textContent = "No se pudieron cargar los datos. Comprueba que el servidor de la API esté activo.";
+
+    const retryButton = document.createElement("button");
+    retryButton.type = "button";
+    retryButton.textContent = "Reintentar";
+    retryButton.addEventListener("click", loadPageData);
+
+    cell.append(document.createTextNode(" "), retryButton);
+    row.append(cell);
+    tbody.replaceChildren(row);
+  };
+
+  const loadPageData = async () => {
+    try {
+      await loadRelations();
+      await load();
+    } catch (error) {
+      console.error(error);
+      showLoadError();
+    }
   };
 
   const formatValue = (value, field) => {
@@ -163,6 +236,6 @@ if (config) {
   });
 
   document.addEventListener("DOMContentLoaded", async () => {
-    try { await loadRelations(); await load(); } catch (error) { alert(error.message); }
+    await loadPageData();
   });
 }

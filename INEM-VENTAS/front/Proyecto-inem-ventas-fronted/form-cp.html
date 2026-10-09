@@ -1,4 +1,47 @@
 <!doctype html>
 <html lang="es">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Códigos postales</title><link rel="stylesheet" href="assets/css/main.css"></head>
-<body><main class="main-wrapper"><section class="container-fluid"><h2>Códigos postales</h2><div class="card-style"><div><label>Código</label><input name="codigo" type="text"></div><div><label>Ciudad</label><input name="codCiudad" type="number"></div><p><a href="#0">Confirmar</a> <a href="#0">Cancelar</a></p></div><div class="card-style"><table class="table"><thead><tr><th>Código</th><th>Ciudad</th><th>Acción</th></tr></thead><tbody><tr><td colspan="3">Cargando...</td></tr></tbody></table></div></section></main><script src="libs/crud.js"></script></body></html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Productos de compras | InemMotors</title>
+	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
+	<link rel="stylesheet" href="assets/css/main.css">
+	<link rel="stylesheet" href="assets/css/dealer-forms.css">
+</head>
+<body class="dealer-form">
+	<main class="main-wrapper">
+		<section class="container-fluid">
+			<h2>Productos asociados a compras</h2>
+			<div class="form-elements-wrapper">
+				<div class="card-style">
+					<h6>Vincular producto</h6>
+					<p class="text-sm">Asocia un producto del catálogo a una compra registrada.</p>
+					<div class="select-style-1">
+						<label for="compra-id">Compra</label>
+						<div class="select-position"><select id="compra-id" name="Compra_id"><option value="">Selecciona una compra</option></select></div>
+					</div>
+					<div class="select-style-1">
+						<label for="producto-id">Producto</label>
+						<div class="select-position"><select id="producto-id" name="Producto_id"><option value="">Selecciona un producto</option></select></div>
+					</div>
+					<ul class="buttons-group">
+						<li><a href="#0" class="main-btn success-btn-outline">Guardar</a></li>
+						<li><a href="#0" class="main-btn primary-btn-outline">Actualizar</a></li>
+					</ul>
+				</div>
+				<div class="card-style">
+					<h6>Productos en compras</h6>
+					<p class="text-sm">Relaciones registradas entre compras y productos.</p>
+					<div class="table-wrapper table-responsive">
+						<table class="table">
+							<thead><tr><th>Compra</th><th>Producto</th><th>Acción</th></tr></thead>
+							<tbody><tr><td colspan="3" class="text-center text-sm">Cargando registros...</td></tr></tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+	<script src="libs/crud.js"></script>
+</body>
+</html>

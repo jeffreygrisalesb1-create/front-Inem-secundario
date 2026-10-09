@@ -108,12 +108,14 @@ document.getElementById("btnEliminar").addEventListener("click", async () => {
 });
 
 async function cargarCategoriasProductos() {
+  const tbody = document.getElementById("tablaCP");
+
   try {
     const respuesta = await fetch(API);
+    if (!respuesta.ok) throw new Error(`HTTP ${respuesta.status}`);
 
     const catPro = await respuesta.json();
-
-    const tbody = document.getElementById("tablaCP");
+    if (!Array.isArray(catPro)) throw new Error("La respuesta de la API no es una lista");
 
     tbody.innerHTML = "";
 
@@ -141,8 +143,24 @@ async function cargarCategoriasProductos() {
     });
   } catch (error) {
     console.error(error);
+    if (!tbody) return;
 
-    alert("No fue posible cargar las categorías de producto");
+    const row = document.createElement("tr");
+    const cell = document.createElement("td");
+    cell.colSpan = 3;
+    cell.className = "text-center text-sm";
+    cell.setAttribute("role", "status");
+    cell.textContent = "No se pudieron cargar las categorías. Comprueba que el servidor de la API esté activo.";
+
+    const retryButton = document.createElement("button");
+    retryButton.type = "button";
+    retryButton.className = "btn-small blue";
+    retryButton.textContent = "Reintentar";
+    retryButton.addEventListener("click", cargarCategoriasProductos);
+
+    cell.append(document.createTextNode(" "), retryButton);
+    row.append(cell);
+    tbody.replaceChildren(row);
   }
 }
 

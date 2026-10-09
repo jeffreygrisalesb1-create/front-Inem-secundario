@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="shortcut icon" href="assets/images/favicon.svg" type="image/x-icon" />
-    <title>Form <categoria-producto> </categoria-producto> | PlainAdmin Demo</title>
+    <title>Categorías de producto | InemMotors</title>
 
     <!-- ========== All CSS files linkup ========= -->
     <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
@@ -13,8 +13,438 @@
     <link rel="stylesheet" href="assets/css/materialdesignicons.min.css" />
     <link rel="stylesheet" href="assets/css/fullcalendar.css" />
     <link rel="stylesheet" href="assets/css/main.css" />
+    <link rel="stylesheet" href="assets/css/dealer-forms.css" />
+    <style>
+      body.automotive-admin {
+        --dealer-ink: #191c1a;
+        --dealer-muted: #737874;
+        --dealer-paper: #f3f4f1;
+        --dealer-line: #e4e7e2;
+        --dealer-accent: #d65139;
+        background: var(--dealer-paper);
+        color: var(--dealer-ink);
+        font-family: "Aptos", "Segoe UI", sans-serif;
+      }
+
+      .automotive-admin .main-wrapper {
+        background: var(--dealer-paper);
+      }
+
+      .automotive-admin .sidebar-nav-wrapper {
+        background: #191c1a;
+      }
+
+      .automotive-admin .sidebar-nav-wrapper .navbar-logo img {
+        visibility: hidden;
+      }
+
+      .automotive-admin .sidebar-nav-wrapper .navbar-logo a::after {
+        display: block;
+        color: #fff;
+        content: "INEM / MOTORS";
+        font-size: 14px;
+        font-weight: 700;
+        letter-spacing: 1px;
+      }
+
+      .automotive-admin .sidebar-nav-wrapper .promo-box {
+        display: none;
+      }
+
+      .automotive-admin .sidebar-nav-wrapper .sidebar-nav ul li a,
+      .automotive-admin .sidebar-nav-wrapper .sidebar-nav ul li a .text {
+        color: #d7dbd6;
+      }
+
+      .automotive-admin .sidebar-nav-wrapper .sidebar-nav ul li a.active,
+      .automotive-admin .sidebar-nav-wrapper .sidebar-nav ul li a:hover {
+        color: #fff;
+      }
+
+      .automotive-admin .header {
+        background: rgba(243, 244, 241, .94);
+        border-bottom: 1px solid var(--dealer-line);
+        box-shadow: none;
+      }
+
+      .automotive-admin .menu-toggle-btn .main-btn {
+        background: var(--dealer-ink);
+        border-color: var(--dealer-ink);
+      }
+
+      .automotive-admin .inventory-page {
+        padding-bottom: 54px;
+      }
+
+      .automotive-admin .inventory-page .container-fluid {
+        max-width: 1480px;
+      }
+
+      @keyframes dealer-enter {
+        from {
+          opacity: 0;
+          transform: translateY(14px);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes dealer-row-enter {
+        from {
+          opacity: 0;
+          transform: translateY(7px);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .automotive-admin .inventory-hero {
+        animation: dealer-enter .65s cubic-bezier(.2, .7, .2, 1) both;
+      }
+
+      .automotive-admin .category-editor,
+      .automotive-admin .category-list {
+        animation: dealer-enter .55s cubic-bezier(.2, .7, .2, 1) both;
+      }
+
+      .automotive-admin .category-editor {
+        animation-delay: .12s;
+      }
+
+      .automotive-admin .category-list {
+        animation-delay: .22s;
+      }
+
+      .automotive-admin .category-list .table tbody tr {
+        animation: dealer-row-enter .35s ease both;
+      }
+
+      .automotive-admin .category-list .table tbody tr:nth-child(2) {
+        animation-delay: .05s;
+      }
+
+      .automotive-admin .category-list .table tbody tr:nth-child(3) {
+        animation-delay: .1s;
+      }
+
+      .automotive-admin .category-list .table tbody tr:nth-child(4) {
+        animation-delay: .15s;
+      }
+
+      .automotive-admin .inventory-hero {
+        position: relative;
+        isolation: isolate;
+        display: flex;
+        min-height: 290px;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 32px;
+        overflow: hidden;
+        margin: 28px 0 32px;
+        padding: 38px 44px;
+        border-radius: 6px;
+        background: #202522 url("https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1800&q=85") center 55% / cover no-repeat;
+        color: #fff;
+      }
+
+      .automotive-admin .inventory-hero::before {
+        position: absolute;
+        z-index: -1;
+        inset: 0;
+        background: linear-gradient(90deg, rgba(18, 21, 19, .94) 0%, rgba(18, 21, 19, .79) 43%, rgba(18, 21, 19, .16) 100%);
+        content: "";
+      }
+
+      .automotive-admin .inventory-hero-copy {
+        max-width: 640px;
+      }
+
+      .automotive-admin .inventory-eyebrow,
+      .automotive-admin .section-eyebrow {
+        display: block;
+        margin-bottom: 14px;
+        color: #f18870;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+      }
+
+      .automotive-admin .inventory-hero h1 {
+        max-width: 600px;
+        margin: 0;
+        color: #fff;
+        font-size: clamp(32px, 4vw, 52px);
+        font-weight: 600;
+        line-height: 1.06;
+      }
+
+      .automotive-admin .inventory-hero p {
+        max-width: 510px;
+        margin: 14px 0 0;
+        color: rgba(255, 255, 255, .78);
+        font-size: 15px;
+        line-height: 1.65;
+      }
+
+      .automotive-admin .inventory-home-link {
+        display: inline-flex;
+        flex: 0 0 auto;
+        align-items: center;
+        gap: 10px;
+        padding: 12px 16px;
+        border: 1px solid rgba(255, 255, 255, .48);
+        border-radius: 3px;
+        color: #fff;
+        font-size: 13px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: background .2s ease, border-color .2s ease, transform .2s ease;
+      }
+
+      .automotive-admin .inventory-home-link:hover {
+        border-color: #fff;
+        background: rgba(255, 255, 255, .12);
+        color: #fff;
+        transform: translateY(-2px);
+      }
+
+      .automotive-admin .inventory-home-link span {
+        color: #f18870;
+        font-size: 18px;
+        line-height: 1;
+      }
+
+      .automotive-admin .inventory-workspace {
+        display: grid;
+        grid-template-columns: minmax(280px, .78fr) minmax(0, 1.65fr);
+        align-items: start;
+        gap: 22px;
+      }
+
+      .automotive-admin .category-editor,
+      .automotive-admin .category-list {
+        min-width: 0;
+        border: 1px solid var(--dealer-line);
+        border-radius: 5px;
+        background: #fff;
+      }
+
+      .automotive-admin .category-editor {
+        padding: 28px;
+      }
+
+      .automotive-admin .category-editor .section-eyebrow,
+      .automotive-admin .category-list .section-eyebrow {
+        margin-bottom: 8px;
+        color: var(--dealer-accent);
+      }
+
+      .automotive-admin .category-editor h2,
+      .automotive-admin .category-list h2 {
+        margin: 0;
+        color: var(--dealer-ink);
+        font-size: 21px;
+        font-weight: 650;
+        line-height: 1.25;
+      }
+
+      .automotive-admin .editor-description,
+      .automotive-admin .list-description {
+        margin: 9px 0 24px;
+        color: var(--dealer-muted);
+        font-size: 13px;
+        line-height: 1.6;
+      }
+
+      .automotive-admin .category-editor .input-style-1 {
+        margin-bottom: 25px;
+      }
+
+      .automotive-admin .category-editor .input-style-1 label {
+        margin-bottom: 9px;
+        color: #343a36;
+        font-size: 12px;
+        font-weight: 650;
+      }
+
+      .automotive-admin .category-editor .input-style-1 input {
+        height: 48px;
+        border: 1px solid #d9ded9;
+        border-radius: 3px;
+        background: #fbfcfa;
+        color: var(--dealer-ink);
+        font-size: 14px;
+        transition: border-color .2s ease, box-shadow .2s ease, background .2s ease;
+      }
+
+      .automotive-admin .category-editor .input-style-1 input:focus {
+        border-color: var(--dealer-accent);
+        box-shadow: 0 0 0 3px rgba(214, 81, 57, .11);
+      }
+
+      .automotive-admin .category-editor .buttons-group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 9px;
+        margin: 0;
+      }
+
+      .automotive-admin .category-editor .buttons-group li {
+        margin: 0;
+      }
+
+      .automotive-admin .category-editor .buttons-group .main-btn {
+        min-height: 40px;
+        padding: 0 13px;
+        border-radius: 3px;
+        font-size: 12px;
+        font-weight: 600;
+        transition: color .2s ease, background .2s ease, border-color .2s ease, transform .2s ease;
+      }
+
+      .automotive-admin .category-editor .buttons-group .main-btn:hover {
+        transform: translateY(-2px);
+      }
+
+      .automotive-admin .category-editor #btnGuardar {
+        border-color: #39ff14;
+        background: #39ff14;
+        box-shadow: 0 0 12px rgba(57, 255, 20, .35);
+        color: #10210c;
+      }
+
+      .automotive-admin .category-editor #btnGuardar:hover {
+        border-color: #66ff43;
+        background: #66ff43;
+        box-shadow: 0 0 18px rgba(57, 255, 20, .5);
+      }
+
+      .automotive-admin .category-list {
+        padding: 28px;
+      }
+
+      .automotive-admin .category-list-header {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 16px;
+      }
+
+      .automotive-admin .list-description {
+        margin-bottom: 20px;
+      }
+
+      .automotive-admin .list-status {
+        flex: 0 0 auto;
+        padding: 6px 9px;
+        border: 1px solid #dfe5df;
+        border-radius: 2px;
+        color: #536159;
+        font-size: 10px;
+        font-weight: 650;
+        letter-spacing: .4px;
+        text-transform: uppercase;
+      }
+
+      .automotive-admin .category-list .table-wrapper {
+        overflow-x: auto;
+        border-top: 1px solid var(--dealer-line);
+      }
+
+      .automotive-admin .category-list .table {
+        min-width: 440px;
+        margin: 0;
+      }
+
+      .automotive-admin .category-list .table thead th {
+        padding: 15px 12px;
+        border-bottom: 1px solid var(--dealer-line);
+        background: #f8f9f7;
+      }
+
+      .automotive-admin .category-list .table thead h6 {
+        margin: 0;
+        color: #6f7771;
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: .8px;
+        text-transform: uppercase;
+      }
+
+      .automotive-admin .category-list .table tbody td {
+        padding: 15px 12px;
+        border-bottom: 1px solid #edf0ec;
+        color: #333a35;
+        font-size: 13px;
+        vertical-align: middle;
+      }
+
+      .automotive-admin .category-list .table tbody tr:last-child td {
+        border-bottom: 0;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .automotive-admin *,
+        .automotive-admin *::before,
+        .automotive-admin *::after {
+          animation-duration: .01ms !important;
+          animation-iteration-count: 1 !important;
+          scroll-behavior: auto !important;
+          transition-duration: .01ms !important;
+        }
+      }
+
+      @media (max-width: 991px) {
+        .automotive-admin .inventory-workspace {
+          grid-template-columns: minmax(250px, .8fr) minmax(0, 1.2fr);
+        }
+
+        .automotive-admin .category-editor,
+        .automotive-admin .category-list {
+          padding: 22px;
+        }
+      }
+
+      @media (max-width: 767px) {
+        .automotive-admin .inventory-hero {
+          min-height: 340px;
+          flex-direction: column;
+          align-items: flex-start;
+          justify-content: flex-end;
+          gap: 20px;
+          margin: 20px 0 22px;
+          padding: 26px 22px;
+          background-position: 58% center;
+        }
+
+        .automotive-admin .inventory-hero::before {
+          background: linear-gradient(0deg, rgba(18, 21, 19, .94) 0%, rgba(18, 21, 19, .72) 58%, rgba(18, 21, 19, .12) 100%);
+        }
+
+        .automotive-admin .inventory-hero h1 {
+          font-size: 34px;
+        }
+
+        .automotive-admin .inventory-workspace {
+          grid-template-columns: 1fr;
+          gap: 14px;
+        }
+
+        .automotive-admin .category-editor,
+        .automotive-admin .category-list {
+          padding: 21px 18px;
+        }
+      }
+    </style>
   </head>
-  <body>
+  <body class="automotive-admin dealer-form">
     <!-- ======== Preloader =========== -->
     <div id="preloader">
       <div class="spinner"></div>
@@ -39,7 +469,7 @@
               data-bs-target="#ddmenu_4"
               aria-controls="ddmenu_4"
               aria-expanded="false"
-              aria-label="Toggle navigation"
+              aria-label="Abrir menú del concesionario"
             >
               <span class="icon">
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -53,7 +483,7 @@
                     d="M10.8333 14.5834C10.8333 12.5123 12.5123 10.8334 14.5833 10.8334C16.6544 10.8334 18.3333 12.5123 18.3333 14.5834C18.3333 16.6545 16.6544 18.3334 14.5833 18.3334C12.5123 18.3334 10.8333 16.6545 10.8333 14.5834Z" />
                 </svg>
               </span>
-              <span class="text">Admin Data Base </span>
+              <span class="text">Gestión del concesionario</span>
             </a>
             <ul id="ddmenu_4" class="collapsed show dropdown-nav">
               <li>
@@ -101,10 +531,10 @@
         <div class="promo-icon">
           <img class="mx-auto" src="./assets/images/logo/logo-icon-big.svg" alt="Logo">
         </div>
-        <h3>Upgrade to PRO</h3>
-        <p>Improve your development process and start doing more with PlainAdmin PRO!</p>
-        <a href="https://plainadmin.com/pro" target="_blank" rel="nofollow" class="main-btn primary-btn btn-hover">
-          Upgrade to PRO
+        <h3>Ver inventario</h3>
+        <p>Encuentra el vehículo ideal con atención personalizada.</p>
+        <a href="index.html" target="_blank" rel="nofollow" class="main-btn primary-btn btn-hover">
+          Ver inventario
         </a>
       </div>
     </aside>
@@ -121,7 +551,7 @@
               <div class="header-left d-flex align-items-center">
                 <div class="menu-toggle-btn mr-15">
                   <button id="menu-toggle" class="main-btn primary-btn btn-hover">
-                    <i class="lni lni-chevron-left me-2"></i> Menu
+                    <i class="lni lni-chevron-left me-2"></i> Menú
                   </button>
                 </div>
               </div>
@@ -150,16 +580,16 @@
                         </div>
                         <div class="content">
                           <h6>
-                            John Doe
+                            Equipo de ventas
                             <span class="text-regular">
-                              comment on a product.
+                              actualizó el catálogo de vehículos.
                             </span>
                           </h6>
                           <p>
-                            Lorem ipsum dolor sit amet, consect etur adipiscing
-                            elit Vivamus tortor.
+                            Consulta las novedades del concesionario
+                            y recibe atención personalizada.
                           </p>
-                          <span>10 mins ago</span>
+                          <span>Hace 10 min</span>
                         </div>
                       </a>
                     </li>
@@ -170,16 +600,16 @@
                         </div>
                         <div class="content">
                           <h6>
-                            Jonathon
+                            Equipo INEM
                             <span class="text-regular">
-                              like on a product.
+                              respondió a una solicitud de compra.
                             </span>
                           </h6>
                           <p>
-                            Lorem ipsum dolor sit amet, consect etur adipiscing
-                            elit Vivamus tortor.
+                            Consulta las novedades del concesionario
+                            y recibe atención personalizada.
                           </p>
-                          <span>10 mins ago</span>
+                          <span>Hace 10 min</span>
                         </div>
                       </a>
                     </li>
@@ -207,9 +637,9 @@
                           <img src="assets/images/lead/lead-5.png" alt="" />
                         </div>
                         <div class="content">
-                          <h6>Jacob Jones</h6>
-                          <p>Hey!I can across your profile and ...</p>
-                          <span>10 mins ago</span>
+                          <h6>Equipo de ventas</h6>
+                          <p>Hola, hay una actualización en tu solicitud.</p>
+                          <span>Hace 10 min</span>
                         </div>
                       </a>
                     </li>
@@ -219,9 +649,9 @@
                           <img src="assets/images/lead/lead-3.png" alt="" />
                         </div>
                         <div class="content">
-                          <h6>John Doe</h6>
-                          <p>Would you mind please checking out</p>
-                          <span>12 mins ago</span>
+                          <h6>Equipo de ventas</h6>
+                          <p>¿Podrías revisar la solicitud pendiente?</p>
+                          <span>Hace 12 min</span>
                         </div>
                       </a>
                     </li>
@@ -231,9 +661,9 @@
                           <img src="assets/images/lead/lead-2.png" alt="" />
                         </div>
                         <div class="content">
-                          <h6>Anee Lee</h6>
-                          <p>Hey! are you available for freelance?</p>
-                          <span>1h ago</span>
+                          <h6>Equipo INEM</h6>
+                          <p>¿Necesitas ayuda con una compra?</p>
+                          <span>Hace 1 h</span>
                         </div>
                       </a>
                     </li>
@@ -250,8 +680,8 @@
                           <img src="assets/images/profile/profile-image.png" alt="" />
                         </div>
                         <div>
-                          <h6 class="fw-500">Adam Joe</h6>
-                          <p>Admin</p>
+                          <h6 class="fw-500">Equipo INEM</h6>
+                          <p>Administración</p>
                         </div>
                       </div>
                     </div>
@@ -263,32 +693,32 @@
                           <img src="assets/images/profile/profile-image.png" alt="image">
                         </div>
                         <div class="content">
-                          <h4 class="text-sm">Adam Joe</h4>
+                          <h4 class="text-sm">Equipo INEM</h4>
                           <a class="text-black/40 dark:text-white/40 hover:text-black dark:hover:text-white text-xs"
-                            href="#">Email@gmail.com</a>
+                            href="#">Administración de ventas</a>
                         </div>
                       </div>
                     </li>
                     <li class="divider"></li>
                     <li>
                       <a href="#0">
-                        <i class="lni lni-user"></i> View Profile
+                        <i class="lni lni-user"></i> Ver perfil
                       </a>
                     </li>
                     <li>
                       <a href="#0">
-                        <i class="lni lni-alarm"></i> Notifications
+                        <i class="lni lni-alarm"></i> Notificaciones
                       </a>
                     </li>
                     <li>
-                      <a href="#0"> <i class="lni lni-inbox"></i> Messages </a>
+                      <a href="#0"> <i class="lni lni-inbox"></i> Mensajes </a>
                     </li>
                     <li>
-                      <a href="#0"> <i class="lni lni-cog"></i> Settings </a>
+                      <a href="#0"> <i class="lni lni-cog"></i> Configuración </a>
                     </li>
                     <li class="divider"></li>
                     <li>
-                      <a href="#0"> <i class="lni lni-exit"></i> Sign Out </a>
+                      <a href="#0"> <i class="lni lni-exit"></i> Cerrar sesión </a>
                     </li>
                   </ul>
                 </div>
@@ -301,105 +731,70 @@
       <!-- ========== header end ========== -->
 
       <!-- ========== tab components start ========== -->
-      <section class="tab-components">
+      <section class="tab-components inventory-page">
         <div class="container-fluid">
-          <!-- ========== title-wrapper start ========== -->
-          <div class="title-wrapper pt-30">
-            <div class="row align-items-center">
-              <div class="col-md-6">
-                <div class="title">
-                  <h2>categoria-productos</h2>
-                </div>
-              </div>
-              <!-- end col -->
-              <div class="col-md-12">
-                <div class="breadcrumb-wrapper">
-                  <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb">
-                      <li class="breadcrumb-item">
-                        <a href="#0">Dashboard</a>
-                      </li>
-                      <li class="breadcrumb-item"><a href="#0">Forms</a></li>
-                      <li class="breadcrumb-item active" aria-current="page">
-                        Form categorias
-                      </li>
-                    </ol>
-                  </nav>
-                </div>
-              </div>
-              <!-- end col -->
+          <div class="inventory-hero">
+            <div class="inventory-hero-copy">
+              <span class="inventory-eyebrow">InemMotors / Operaciones</span>
+              <h1>Un inventario bien organizado empieza aquí.</h1>
+              <p>Administra las familias de producto que mantienen cada vehículo y accesorio en su lugar.</p>
             </div>
-            <!-- end row -->
+            <a class="inventory-home-link" href="index.html"><span aria-hidden="true">&#8592;</span> Volver al panel</a>
           </div>
-          <!-- ========== title-wrapper end ========== -->
 
-          <!-- ========== form-elements-wrapper start ========== -->
-          <div class="form-elements-wrapper">
-            <div class="row">
-              <div class="col-lg-12">
-                <!-- input style start -->
-                <div class="card-style mb-30">
-                  <form id="frmCategoriaProducto">
-                    <h6 class="mb-25">Formulario Categorías de Producto</h6>
-                    <div class="input-style-1">
-                      <label>nombre</label>
-                      <input type="hidden" name="CatPro_id" id="CatPro_id" />
-                      <input type="text" name="nombre" id="nombre" placeholder="nombre" />
-                    </div>
+          <div class="inventory-workspace">
+            <section class="category-editor" aria-labelledby="category-form-title">
+              <span class="section-eyebrow">Catálogo / Configuración</span>
+              <h2 id="category-form-title">Categorías de producto</h2>
+              <p class="editor-description">Mantén una clasificación consistente para el inventario del concesionario.</p>
+              <form id="frmCategoriaProducto">
+                <div class="input-style-1">
+                  <label for="nombre">Nombre de la categoría</label>
+                  <input type="hidden" name="CatPro_id" id="CatPro_id" />
+                  <input type="text" name="nombre" id="nombre" placeholder="Ej. SUV, sedán, accesorios" />
+                </div>
 
-                    <ul class="buttons-group">
-                      <li>
-                        <a href="#0" id="btnGuardar" class="main-btn success-btn-outline rounded-full btn-hover">Guardar</a>
-                      </li>
-                      <li>
-                        <a href="#0" id="btnActualizar" class="main-btn primary-btn-outline rounded-full btn-hover">Actualizar</a>
-                      </li>
-                      <li>
-                        <a href="#0" id="btnEliminar" class="main-btn danger-btn-outline rounded-full btn-hover">Eliminar</a>
-                      </li>
-                    </ul>
-                  </form>
+                <ul class="buttons-group">
+                  <li>
+                    <a href="#0" id="btnGuardar" class="main-btn success-btn-outline rounded-full btn-hover">Guardar</a>
+                  </li>
+                  <li>
+                    <a href="#0" id="btnActualizar" class="main-btn primary-btn-outline rounded-full btn-hover">Actualizar</a>
+                  </li>
+                  <li>
+                    <a href="#0" id="btnEliminar" class="main-btn danger-btn-outline rounded-full btn-hover">Eliminar</a>
+                  </li>
+                </ul>
+              </form>
+            </section>
+
+            <section class="category-list" aria-labelledby="category-list-title">
+              <div class="category-list-header">
+                <div>
+                  <span class="section-eyebrow">Inventario / Clasificación</span>
+                  <h2 id="category-list-title">Categorías registradas</h2>
                 </div>
-                <!-- end card -->
+                <span class="list-status">Catálogo</span>
               </div>
-              <!-- end col -->
-            </div>
-            <div class="row">
-              <div class="col-lg-12">
-                <div class="card-style mb-30">
-                  <h6 class="mb-10">Listado de Categorías de Producto</h6>
-                  <p class="text-sm mb-20">
-                    Registros de Categorías de Producto guardados en el sistema.
-                  </p>
-                  <div class="table-wrapper table-responsive">
-                    <table class="table">
-                      <thead>
-                        <tr>
-                          <th>
-                            <h6>ID</h6>
-                          </th>
-                          <th>
-                            <h6>Nombre</h6>
-                          </th>
-                          <th>
-                            <h6>Acción</h6>
-                          </th>
-                        </tr>
-                        <!-- end table row-->
-                      </thead>
-                      <tbody  id="tablaCP" >
-                        <tr>
-                          <td colspan="3" class="text-center text-sm">Aún no hay registros — se cargarán desde el backend.</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
+              <p class="list-description">Familias de producto disponibles en el sistema.</p>
+              <div class="table-wrapper table-responsive">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th><h6>ID</h6></th>
+                      <th><h6>Nombre</h6></th>
+                      <th><h6>Acción</h6></th>
+                    </tr>
+                  </thead>
+                  <tbody id="tablaCP">
+                    <tr>
+                      <td colspan="3" class="text-center text-sm">Aún no hay registros; se cargarán desde el sistema.</td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
-              <!-- end col -->
-            </div>
+            </section>
           </div>
-          <!-- ========== form-elements-wrapper end ========== -->
 
         </div>
         <!-- end container -->
@@ -413,20 +808,11 @@
             <div class="col-md-6 order-last order-md-first">
               <div class="copyright text-center text-md-start">
                 <p class="text-sm">
-                  Designed and Developed by
-                  <a href="https://plainadmin.com" rel="nofollow" target="_blank">
-                    PlainAdmin
-                  </a>
+                  InemMotors · Gestión de inventario
                 </p>
               </div>
             </div>
             <!-- end col-->
-            <div class="col-md-6">
-              <div class="terms d-flex justify-content-center justify-content-md-end">
-                <a href="#0" class="text-sm">Term & Conditions</a>
-                <a href="#0" class="text-sm ml-15">Privacy & Policy</a>
-              </div>
-            </div>
           </div>
           <!-- end row -->
         </div>

@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="shortcut icon" href="assets/images/favicon.svg" type="image/x-icon" />
-    <title>Form empleados | PlainAdmin Demo</title>
+    <title>Empleados | InemMotors</title>
 
     <!-- ========== All CSS files linkup ========= -->
     <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
@@ -13,8 +13,9 @@
     <link rel="stylesheet" href="assets/css/materialdesignicons.min.css" />
     <link rel="stylesheet" href="assets/css/fullcalendar.css" />
     <link rel="stylesheet" href="assets/css/main.css" />
+    <link rel="stylesheet" href="assets/css/dealer-forms.css" />
   </head>
-  <body>
+  <body class="dealer-form">
     <!-- ======== Preloader =========== -->
     <div id="preloader">
       <div class="spinner"></div>
@@ -39,7 +40,7 @@
               data-bs-target="#ddmenu_4"
               aria-controls="ddmenu_4"
               aria-expanded="false"
-              aria-label="Toggle navigation"
+              aria-label="Abrir menú del concesionario"
             >
               <span class="icon">
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -53,7 +54,7 @@
                     d="M10.8333 14.5834C10.8333 12.5123 12.5123 10.8334 14.5833 10.8334C16.6544 10.8334 18.3333 12.5123 18.3333 14.5834C18.3333 16.6545 16.6544 18.3334 14.5833 18.3334C12.5123 18.3334 10.8333 16.6545 10.8333 14.5834Z" />
                 </svg>
               </span>
-              <span class="text">Admin Data Base </span>
+              <span class="text">Gestión del concesionario</span>
             </a>
             <ul id="ddmenu_4" class="collapsed show dropdown-nav">
               <li>
@@ -101,10 +102,10 @@
         <div class="promo-icon">
           <img class="mx-auto" src="./assets/images/logo/logo-icon-big.svg" alt="Logo">
         </div>
-        <h3>Upgrade to PRO</h3>
-        <p>Improve your development process and start doing more with PlainAdmin PRO!</p>
-        <a href="https://plainadmin.com/pro" target="_blank" rel="nofollow" class="main-btn primary-btn btn-hover">
-          Upgrade to PRO
+        <h3>Ver inventario</h3>
+        <p>Encuentra el vehículo ideal con atención personalizada.</p>
+        <a href="index.html" target="_blank" rel="nofollow" class="main-btn primary-btn btn-hover">
+          Ver inventario
         </a>
       </div>
     </aside>
@@ -121,7 +122,7 @@
               <div class="header-left d-flex align-items-center">
                 <div class="menu-toggle-btn mr-15">
                   <button id="menu-toggle" class="main-btn primary-btn btn-hover">
-                    <i class="lni lni-chevron-left me-2"></i> Menu
+                    <i class="lni lni-chevron-left me-2"></i> Menú
                   </button>
                 </div>
               </div>
@@ -150,16 +151,16 @@
                         </div>
                         <div class="content">
                           <h6>
-                            John Doe
+                            Equipo de ventas
                             <span class="text-regular">
-                              comment on a product.
+                              actualizó el catálogo de vehículos.
                             </span>
                           </h6>
                           <p>
-                            Lorem ipsum dolor sit amet, consect etur adipiscing
-                            elit Vivamus tortor.
+                            Consulta las novedades del concesionario
+                            y recibe atención personalizada.
                           </p>
-                          <span>10 mins ago</span>
+                          <span>Hace 10 min</span>
                         </div>
                       </a>
                     </li>
@@ -170,16 +171,16 @@
                         </div>
                         <div class="content">
                           <h6>
-                            Jonathon
+                            Equipo INEM
                             <span class="text-regular">
-                              like on a product.
+                              respondió a una solicitud de compra.
                             </span>
                           </h6>
                           <p>
-                            Lorem ipsum dolor sit amet, consect etur adipiscing
-                            elit Vivamus tortor.
+                            Consulta las novedades del concesionario
+                            y recibe atención personalizada.
                           </p>
-                          <span>10 mins ago</span>
+                          <span>Hace 10 min</span>
                         </div>
                       </a>
                     </li>
@@ -207,9 +208,9 @@
                           <img src="assets/images/lead/lead-5.png" alt="" />
                         </div>
                         <div class="content">
-                          <h6>Jacob Jones</h6>
-                          <p>Hey!I can across your profile and ...</p>
-                          <span>10 mins ago</span>
+                          <h6>Equipo de ventas</h6>
+                          <p>Hola, hay una actualización en tu solicitud.</p>
+                          <span>Hace 10 min</span>
                         </div>
                       </a>
                     </li>
@@ -219,9 +220,9 @@
                           <img src="assets/images/lead/lead-3.png" alt="" />
                         </div>
                         <div class="content">
-                          <h6>John Doe</h6>
-                          <p>Would you mind please checking out</p>
-                          <span>12 mins ago</span>
+                          <h6>Equipo de ventas</h6>
+                          <p>¿Podrías revisar la solicitud pendiente?</p>
+                          <span>Hace 12 min</span>
                         </div>
                       </a>
                     </li>
@@ -231,9 +232,9 @@
                           <img src="assets/images/lead/lead-2.png" alt="" />
                         </div>
                         <div class="content">
-                          <h6>Anee Lee</h6>
-                          <p>Hey! are you available for freelance?</p>
-                          <span>1h ago</span>
+                          <h6>Equipo INEM</h6>
+                          <p>¿Necesitas ayuda con una compra?</p>
+                          <span>Hace 1 h</span>
                         </div>
                       </a>
                     </li>
@@ -250,8 +251,8 @@
                           <img src="assets/images/profile/profile-image.png" alt="" />
                         </div>
                         <div>
-                          <h6 class="fw-500">Adam Joe</h6>
-                          <p>Admin</p>
+                          <h6 class="fw-500">Equipo INEM</h6>
+                          <p>Administración</p>
                         </div>
                       </div>
                     </div>
@@ -263,32 +264,32 @@
                           <img src="assets/images/profile/profile-image.png" alt="image">
                         </div>
                         <div class="content">
-                          <h4 class="text-sm">Adam Joe</h4>
+                          <h4 class="text-sm">Equipo INEM</h4>
                           <a class="text-black/40 dark:text-white/40 hover:text-black dark:hover:text-white text-xs"
-                            href="#">Email@gmail.com</a>
+                            href="#">Administración de ventas</a>
                         </div>
                       </div>
                     </li>
                     <li class="divider"></li>
                     <li>
                       <a href="#0">
-                        <i class="lni lni-user"></i> View Profile
+                        <i class="lni lni-user"></i> Ver perfil
                       </a>
                     </li>
                     <li>
                       <a href="#0">
-                        <i class="lni lni-alarm"></i> Notifications
+                        <i class="lni lni-alarm"></i> Notificaciones
                       </a>
                     </li>
                     <li>
-                      <a href="#0"> <i class="lni lni-inbox"></i> Messages </a>
+                      <a href="#0"> <i class="lni lni-inbox"></i> Mensajes </a>
                     </li>
                     <li>
-                      <a href="#0"> <i class="lni lni-cog"></i> Settings </a>
+                      <a href="#0"> <i class="lni lni-cog"></i> Configuración </a>
                     </li>
                     <li class="divider"></li>
                     <li>
-                      <a href="#0"> <i class="lni lni-exit"></i> Sign Out </a>
+                      <a href="#0"> <i class="lni lni-exit"></i> Cerrar sesión </a>
                     </li>
                   </ul>
                 </div>
@@ -317,9 +318,9 @@
                   <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
                       <li class="breadcrumb-item">
-                        <a href="#0">Dashboard</a>
+                        <a href="#0">Inicio</a>
                       </li>
-                      <li class="breadcrumb-item"><a href="#0">Forms</a></li>
+                      <li class="breadcrumb-item"><a href="#0">Formularios</a></li>
                       <li class="breadcrumb-item active" aria-current="page">
                         Form empleados
                       </li>
@@ -425,9 +426,9 @@
             <div class="col-md-6 order-last order-md-first">
               <div class="copyright text-center text-md-start">
                 <p class="text-sm">
-                  Designed and Developed by
-                  <a href="https://plainadmin.com" rel="nofollow" target="_blank">
-                    PlainAdmin
+                  Gestión comercial de
+                  <a href="index.html" rel="nofollow" target="_blank">
+                    InemMotors
                   </a>
                 </p>
               </div>
@@ -435,8 +436,8 @@
             <!-- end col-->
             <div class="col-md-6">
               <div class="terms d-flex justify-content-center justify-content-md-end">
-                <a href="#0" class="text-sm">Term & Conditions</a>
-                <a href="#0" class="text-sm ml-15">Privacy & Policy</a>
+                <a href="#0" class="text-sm">Términos y condiciones</a>
+                <a href="#0" class="text-sm ml-15">Privacidad</a>
               </div>
             </div>
           </div>

@@ -1,4 +1,47 @@
 <!doctype html>
 <html lang="es">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Hojas de vida</title><link rel="stylesheet" href="assets/css/main.css"></head>
-<body><main class="main-wrapper"><section class="container-fluid"><h2>Hojas de vida</h2><div class="card-style"><div><label>Empleado</label><input name="codEmpleado" type="number"></div><div><label>Descripción</label><textarea name="descripcion"></textarea></div><div><label>Archivo URL</label><input name="archivoUrl" type="text"></div><p><a href="#0">Confirmar</a> <a href="#0">Cancelar</a></p></div><div class="card-style"><table class="table"><thead><tr><th>Empleado</th><th>Descripción</th><th>Archivo</th><th>Acción</th></tr></thead><tbody><tr><td colspan="4">Cargando...</td></tr></tbody></table></div></section></main><script src="libs/crud.js"></script></body></html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Vehículos de compras | InemMotors</title>
+	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
+	<link rel="stylesheet" href="assets/css/main.css">
+	<link rel="stylesheet" href="assets/css/dealer-forms.css">
+</head>
+<body class="dealer-form">
+	<main class="main-wrapper">
+		<section class="container-fluid">
+			<h2>Vehículos asociados a compras</h2>
+			<div class="form-elements-wrapper">
+				<div class="card-style">
+					<h6>Vincular vehículo</h6>
+					<p class="text-sm">Asocia un vehículo del inventario a una compra registrada.</p>
+					<div class="select-style-1">
+						<label for="compra-id">Compra</label>
+						<div class="select-position"><select id="compra-id" name="Compra_id"><option value="">Selecciona una compra</option></select></div>
+					</div>
+					<div class="select-style-1">
+						<label for="vehiculo-id">Vehículo</label>
+						<div class="select-position"><select id="vehiculo-id" name="Vehiculo_id"><option value="">Selecciona un vehículo</option></select></div>
+					</div>
+					<ul class="buttons-group">
+						<li><a href="#0" class="main-btn success-btn-outline">Guardar</a></li>
+						<li><a href="#0" class="main-btn primary-btn-outline">Actualizar</a></li>
+					</ul>
+				</div>
+				<div class="card-style">
+					<h6>Vehículos en compras</h6>
+					<p class="text-sm">Relaciones registradas entre compras y vehículos.</p>
+					<div class="table-wrapper table-responsive">
+						<table class="table">
+							<thead><tr><th>Compra</th><th>Vehículo</th><th>Acción</th></tr></thead>
+							<tbody><tr><td colspan="3" class="text-center text-sm">Cargando registros...</td></tr></tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+	<script src="libs/crud.js"></script>
+</body>
+</html>
